@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Example Title</title>
+    <meta name="author" content="Your Name">
+    <meta name="description" content="Example description">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <style>
+        #search-box {
+            position: relative;
+            display: flex;
+            float: right;
+            transition: all .3s ease-in-out;
+            width: 23%;
+            height: 60px;
+            border-radius: 50px;
+            background: rgba(0, 0, 0);
+            transition: all .5s cubic-bezier(0.000, 0.105, 0.035, 1.570);
+        }
+
+        #search-icon {
+            position: absolute;
+            top: 18px;
+            left: 14px;
+            font-size: 24px;
+            color: #fbdf0d;
+        }
+
+        #search-input {
+            text-indent: 31px;
+            transition: all .3s ease-in-out;
+            height: 44px;
+            margin-top: 8px;
+            background: transparent;
+            border: none;
+        }
+
+        #search-input::placeholder {
+            color: #fbdf0d;
+
+        }
+
+        #search-input:focus {
+            width: 100%;
+            box-shadow: none;
+            color: #fbdf0d;
+        }
+
+        #search-row {
+            margin-top: 20px;
+        }
+
+        #search-box-close .close {
+            position: absolute;
+            z-index: 1;
+            top: 20%;
+            right: 20px;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            transform: rotate(-180deg);
+            transition: all .3s cubic-bezier(0.285, -0.450, 0.935, 0.110);
+            transition-delay: 0.2s;
+        }
+
+        #search-box-close {
+            display: none;
+        }
+
+        #search-box-close .close {
+            right: -50px;
+            transform: rotate(45deg);
+            transition: all .6s cubic-bezier(0.000, 0.105, 0.035, 1.570);
+            transition-delay: 0.5s;
+            opacity: 1;
+        }
+
+        #search-box-close .close::before,
+        #search-box-close .close::after {
+            position: absolute;
+            content: '';
+            background: #080808;
+            border-radius: 2px;
+        }
+
+        #search-box-close .close::before {
+            width: 5px;
+            height: 25px;
+            left: 10px;
+            top: 0px;
+        }
+
+        #search-box-close .close::after {
+            width: 25px;
+            height: 5px;
+            left: 0px;
+            top: 10px;
+        }
+
+        #sr-bt {
+            display: none;
+            border-radius: 50px;
+            width: 17%;
+            background: linear-gradient(90deg,
+                    rgba(251, 226, 13, 1) 43%,
+                    rgba(253, 173, 13, 1) 72%) !important;
+            border: none;
+        }
+
+        @media only screen and (max-width: 767px) {
+            #sr-bt {
+                display: none;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row" id="search-row">
+            <div class="col">
+                <form>
+                    <div class="form-group" id="search-box" onclick="search_bar();">
+                        <i class="fa fa-search" id="search-icon"></i>
+                        <input type="text" id="search-input" placeholder="Type to search..." class="form-control" name="search" autocomplete="off">
+                        <input type="submit" id="sr-bt" value="Search">
+                    </div>
+                    <div id="search-box-close" onclick="s_bar();">
+                        <span class="close"></span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var box = document.getElementById("search-box");
+        var row = document.getElementById("search-row");
+        var close = document.getElementById("search-box-close");
+        var sbt = document.getElementById("sr-bt");
+
+        function search_bar() {
+            if (box.style.width = "23%") {
+                box.style.width = "100%";
+                close.style.display = "block";
+                sbt.style.display = "block";
+
+            } else {
+                box.style.width = "23%";
+
+            }
+        }
+
+        function s_bar() {
+            if (box.style.width = "100%") {box.style.width = "23%";
+                close.style.display = "none";
+                sbt.style.display = "none";
+            }
+        }
+
+        function mobile_size(x) {
+            if (x.matches) {
+                box.removeAttribute("onclick");
+                close.removeAttribute("onclick");
+                box.style.width = "100%";
+                sbt.style.display = "block";
+            } else {
+                box.style.width = "24%";
+                sbt.style.display = "none";
+
+            }
+        }
+
+        var x = window.matchMedia("(max-width: 767px)")
+        mobile_size(x)
+        x.addListener(mobile_size)
+
+    </script>
+</body>
+
+</html>
